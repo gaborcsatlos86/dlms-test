@@ -1,0 +1,33 @@
+{% extends 'main.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.5/css/dataTables.bootstrap5.css"/>
+{% endblock %}
+
+{% block javascripts %}
+	{% block importmap %}{{ importmap('app') }}{% endblock %}
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap5.js"></script>
+{% endblock %}
+{% block main %}
+<div id="main-content">
+	<div id="content-head">
+		<h2>Product list</h2>
+		<a class="btn btn-primary" href="{{ path('product_create') }}">create new item</a>
+	</div>
+	<div id="presidents">Loading...</div>
+
+<!-- Insert this at the end of your body element, but before the closing tag -->
+<script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+<script>
+$(function() {
+    $('#presidents').initDataTables({{ datatable_settings(datatable) }});
+});
+</script>
+</div>
+{% endblock %}
